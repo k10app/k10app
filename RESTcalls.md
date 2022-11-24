@@ -145,7 +145,7 @@ returns
 or
 404 : error
 
-## /order/create
+## /order/main/create
 
 Authorization: Bearer <jwttoken>
 
@@ -166,24 +166,45 @@ POST
 
 return 200
 
+```
 {
-    "id":""
+    "status":  "success",
+    "id":  3,
+    "name":  "2022-11-24T20:43:37.909Z"
 }
+```
 
-## /order/list
+## /order/main/list
 
 GET 
 ```
+[
+                  {
+                      "id":  1,
+                      "name":  "2022-11-11T20:00:00.000Z"
+                  },
+                  {
+                      "id":  2,
+                      "name":  "2022-11-12T20:00:00.000Z"
+                  }
+]
+```
+    
+## /order/main/list/id
+GET
+returns
+```
 {
-    id:""
-    items:[
-        {
-                "id":1,
-                "catalogId":1,   
-                "quantity":1
-                "name":"name",
-                "imgurl":"https://",
-        }       
-    ]
+    "id":  "1",
+    "name":  "2022-11-11T20:00:00.000Z",
+    "items":  [
+                  {
+                      "id":  1,
+                      "catalogId":  1,
+                      "quantity":  1,
+                      "name":  "name",
+                      "imgurl":  "https://"
+                  }
+              ]
 }
 ```
