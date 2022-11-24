@@ -15,7 +15,10 @@ POST
 returns
 
 ```
-JWT
+{
+    "status":"ok",
+    "jwt":$jwt
+}
 ```
 
 
@@ -32,7 +35,10 @@ POST
 returns
 
 ```
-JWT
+{
+    "status":"ok",
+    "jwt":$jwt
+}
 ```
 
 # Catalog service
