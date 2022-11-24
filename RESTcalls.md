@@ -115,6 +115,7 @@ returns
 [
     {
         "id":1,
+        "catalogId":1,     
         "quantity":1
         "name":"name",
         "imgurl":"https://",
@@ -129,7 +130,7 @@ Authorization: Bearer <jwttoken>
 POST
 ```
     {
-        "id":1,
+        "catalogId":1,   
         "quantity":1
     }
 ```
@@ -178,6 +179,7 @@ GET
     items:[
         {
                 "id":1,
+                "catalogId":1,   
                 "quantity":1
                 "name":"name",
                 "imgurl":"https://",
