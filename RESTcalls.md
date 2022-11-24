@@ -62,7 +62,7 @@ returns
 ]
 ```
 
-## /catalog/list/<id> (call back from order)
+## /catalog/list/[id] (call back from order)
 GET 
 returns
 
