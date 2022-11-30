@@ -77,7 +77,7 @@ returns
 }
 ```
 
-## /catalog/update (call from order svc)
+## /catalog/bulkStockUpdate (call from order svc)
 ***security issue***
 
 POST
@@ -85,7 +85,7 @@ POST
 [
     {
         "id":1,
-        "quantity":1
+        "inc":1
     }
 ]
 ```
@@ -102,44 +102,67 @@ or
 
 # Order service (basket service)
 PostgresSQL DB
-Redis (optional)
+Always in header: 
+- Authorization: Bearer [jwttoken]
+
+
 
 ## /order/basket/list
 
-Authorization: Bearer <jwttoken>
+Authorization: Bearer [jwttoken]
 
 GET
 
 returns
-```
+```json
 [
-    {
-        "id":1,
-        "catalogId":1,     
-        "quantity":1
-        "name":"name",
-        "imgurl":"https://",
-    }
+  {
+    "id": 1,
+    "userId": "tdewin",
+    "catalogId": "6387867a4cf5338b860c230c",
+    "quantity": "2",
+    "price": "3.00",
+    "name": "sticker",
+    "imgurl": "https://www.kasten.io/hubfs/Kasten%20logos/logo-kasten.io.svg"
+  },
+  {
+    "id": 2,
+    "userId": "tdewin",
+    "catalogId": "6387867a4cf5338b860c230d",
+    "quantity": "1",
+    "price": "3.00",
+    "name": "mug",
+    "imgurl": "https://www.kasten.io/hubfs/Kasten%20logos/logo-kasten.io.svg"
+  },
+  {
+    "id": 3,
+    "userId": "tdewin",
+    "catalogId": "6387867a4cf5338b860c230c",
+    "quantity": "2",
+    "price": "3.00",
+    "name": "sticker",
+    "imgurl": "https://www.kasten.io/hubfs/Kasten%20logos/logo-kasten.io.svg"
+  }
 ]
 ```
 
 ## /order/basket/add
 
-Authorization: Bearer <jwttoken>
+Authorization: Bearer [jwttoken]
 
 POST
-```
-    {
-        "catalogId":1,   
-        "quantity":1
-    }
+```json
+{
+  "catalogId": "6387867a4cf5338b860c230c",
+  "quantity": 2
+}
 ```
 
 returns
 200 
-```
+```json
 {
-    "status":"success"
+  "status": "success"
 }
 ```
 or
@@ -147,13 +170,13 @@ or
 
 ## /order/main/create
 
-Authorization: Bearer <jwttoken>
+Authorization: Bearer [jwttoken]
 
 order will postback to /update
 
 
-POST
-```
+POST (today can be empty, tomorrow address)
+```json
   {
     "name":"",
     "street":"",
@@ -165,46 +188,97 @@ POST
 ```
 
 return 200
-
-```
+```json
 {
-    "status":  "success",
-    "id":  3,
-    "name":  "2022-11-24T20:43:37.909Z"
+  "status": "ok",
+  "data": {
+    "id": 1,
+    "orderName": "Wed Nov 30 2022 21:23",
+    "totalPrice": "9.00",
+    "status": "unpaid",
+    "items": [
+      {
+        "id": 1,
+        "userId": "tdewin",
+        "orderId": "1",
+        "catalogId": "6387867a4cf5338b860c230c",
+        "name": "sticker",
+        "imgurl": "https://www.kasten.io/hubfs/Kasten%20logos/logo-kasten.io.svg",
+        "quantity": "2",
+        "price": "3.00",
+        "totalPrice": "6.00"
+      },
+      {
+        "id": 2,
+        "userId": "tdewin",
+        "orderId": "1",
+        "catalogId": "6387867a4cf5338b860c230d",
+        "name": "mug",
+        "imgurl": "https://www.kasten.io/hubfs/Kasten%20logos/logo-kasten.io.svg",
+        "quantity": "1",
+        "price": "3.00",
+        "totalPrice": "3.00"
+      }
+    ]
+  }
 }
 ```
 
 ## /order/main/list
+Authorization: Bearer [jwttoken]
 
 GET 
-```
+```json
 [
-                  {
-                      "id":  1,
-                      "name":  "2022-11-11T20:00:00.000Z"
-                  },
-                  {
-                      "id":  2,
-                      "name":  "2022-11-12T20:00:00.000Z"
-                  }
+  {
+    "id": 1,
+    "orderName": "Wed Nov 30 2022 21:23",
+    "status": "unpaid",
+    "name": "9.00"
+  },
+  {
+    "id": 2,
+    "orderName": "Wed Nov 30 2022 21:34",
+    "status": "unpaid",
+    "name": "9.00"
+  }
 ]
 ```
     
 ## /order/main/list/id
+Authorization: Bearer [jwttoken]
+
 GET
 returns
-```
+```json
 {
-    "id":  "1",
-    "name":  "2022-11-11T20:00:00.000Z",
-    "items":  [
-                  {
-                      "id":  1,
-                      "catalogId":  1,
-                      "quantity":  1,
-                      "name":  "name",
-                      "imgurl":  "https://"
-                  }
-              ]
+  "id": "1",
+  "name": "Wed Nov 30 2022 21:23",
+  "status": "unpaid",
+  "totalPrice": "9.00",
+  "items": [
+    {
+      "id": 1,
+      "userId": "tdewin",
+      "orderId": "1",
+      "catalogId": "6387867a4cf5338b860c230c",
+      "name": "sticker",
+      "imgurl": "https://www.kasten.io/hubfs/Kasten%20logos/logo-kasten.io.svg",
+      "quantity": "2",
+      "price": "3.00",
+      "totalPrice": "6.00"
+    },
+    {
+      "id": 2,
+      "userId": "tdewin",
+      "orderId": "1",
+      "catalogId": "6387867a4cf5338b860c230d",
+      "name": "mug",
+      "imgurl": "https://www.kasten.io/hubfs/Kasten%20logos/logo-kasten.io.svg",
+      "quantity": "1",
+      "price": "3.00",
+      "totalPrice": "3.00"
+    }
+  ]
 }
 ```
