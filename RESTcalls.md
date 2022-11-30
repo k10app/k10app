@@ -84,7 +84,7 @@ POST
 ```
 [
     {
-        "id":1,
+        "_id":1,
         "inc":1
     }
 ]
@@ -172,8 +172,7 @@ or
 
 Authorization: Bearer [jwttoken]
 
-order will postback to /update
-
+Will delete the basket after creating the order
 
 POST (today can be empty, tomorrow address)
 ```json
@@ -222,6 +221,24 @@ return 200
     ]
   }
 }
+```
+
+## /order/main/pay/:orderid
+Authorization: Bearer [jwttoken]
+
+order will postback to /update
+
+
+POST (today can be empty, tomorrow address)
+```json
+{
+    "K1SA":"1111 2222 3333 4444",
+    "CVC":"111"
+}
+```
+
+Result
+```json
 ```
 
 ## /order/main/list
