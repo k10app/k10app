@@ -166,25 +166,6 @@
        width="216.65036"
        height="88.014206"
        id="rect4398-5-5" />
-    <marker
-       style="overflow:visible"
-       id="TriangleStart-6-1"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="TriangleStart"
-       markerWidth="5.3244081"
-       markerHeight="6.155385"
-       viewBox="0 0 5.3244081 6.1553851"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         transform="scale(0.5)"
-         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         id="path135-3-5" />
-    </marker>
     <rect
        x="212.58817"
        y="300.60239"
@@ -244,9 +225,9 @@
          style="font-size:40px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect297);display:inline;fill:#ffffff"><tspan
            x="70.412109"
            y="162.28125"
-           id="tspan8216"><tspan
+           id="tspan10168"><tspan
              style="font-family:Calibri;-inkscape-font-specification:Calibri"
-             id="tspan8214">Web</tspan></tspan></text>
+             id="tspan10166">Web</tspan></tspan></text>
     </g>
     <g
        id="g538"
@@ -265,9 +246,9 @@
          style="font-size:40px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect297-7);display:inline;fill:#ffffff"><tspan
            x="70.412109"
            y="162.28125"
-           id="tspan8220"><tspan
+           id="tspan10172"><tspan
              style="font-family:Calibri;-inkscape-font-specification:Calibri"
-             id="tspan8218">Catalog</tspan></tspan></text>
+             id="tspan10170">Catalog</tspan></tspan></text>
     </g>
     <g
        id="g594"
@@ -286,9 +267,9 @@
          style="font-size:40px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect297-7-3);display:inline;fill:#ffffff"><tspan
            x="70.412109"
            y="162.28125"
-           id="tspan8224"><tspan
+           id="tspan10176"><tspan
              style="font-family:Calibri;-inkscape-font-specification:Calibri"
-             id="tspan8222">Order</tspan></tspan></text>
+             id="tspan10174">Order</tspan></tspan></text>
     </g>
     <rect
        style="opacity:0.998192;fill:#595959;stroke:#a3a3a3;stroke-width:0.118865;stroke-linecap:round;stroke-linejoin:round;stop-color:#000000"
@@ -346,20 +327,26 @@
          x="69.520638"
          y="96.119942">basket/add</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.383088px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleStart-6-1)"
-       d="M 35.432043,217.39994 H 238.97007"
-       id="path760-3-5" />
+       style="fill:none;stroke:#000000;stroke-width:0.383088px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#TriangleStart)"
+       d="M 237.89528,240.32877 H 216.7131 l -34.40725,0 v -22.41916 l 56.24729,0"
+       id="path760-3-5"
+       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
-       x="68.392235"
-       y="212.38426"
+       x="185.18596"
+       y="224.5652"
        id="text1535-3-21"><tspan
          sodipodi:role="line"
          id="tspan1533-8-8"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Calibri;-inkscape-font-specification:Calibri;stroke-width:0.264583"
-         x="68.392235"
-         y="212.38426">basket/clear</tspan></text>
+         x="185.18596"
+         y="224.5652">succes: </tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Calibri;-inkscape-font-specification:Calibri;stroke-width:0.264583"
+         x="185.18596"
+         y="238.33517"
+         id="tspan10083">clear basket</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;inline-size:63.7001;display:inline;stroke-width:0.264583"
@@ -368,9 +355,9 @@
        id="text1535-3-2"><tspan
          x="166.86177"
          y="122.68198"
-         id="tspan8228"><tspan
+         id="tspan10180"><tspan
            style="font-family:Calibri;-inkscape-font-specification:Calibri"
-           id="tspan8226">list/:catalogid</tspan></tspan></text>
+           id="tspan10178">list/:catalogid</tspan></tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.383088px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleStart-6-7)"
        d="M 36.148568,153.20146 H 239.68659"
@@ -408,9 +395,9 @@
        style="font-size:40px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4398);display:inline"><tspan
          x="212.58789"
          y="335.60156"
-         id="tspan8232"><tspan
+         id="tspan10184"><tspan
            style="font-family:Calibri;-inkscape-font-specification:Calibri;fill:#288782"
-           id="tspan8230">catalogid,quantity</tspan></tspan></text>
+           id="tspan10182">catalogid,quantity</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,110.38921,47.085413)"
@@ -418,9 +405,9 @@
        style="font-size:40px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4398-5);display:inline"><tspan
          x="212.58789"
          y="335.60156"
-         id="tspan8236"><tspan
+         id="tspan10188"><tspan
            style="font-family:Calibri;-inkscape-font-specification:Calibri;fill:#fc5124"
-           id="tspan8234">price, imgurl</tspan></tspan></text>
+           id="tspan10186">price, imgurl</tspan></tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleStart-7-3)"
        d="M 239.5603,200.34568 H 142.47104"
@@ -434,9 +421,9 @@
        transform="translate(0.35826607,74.287118)"><tspan
          x="166.86177"
          y="122.68198"
-         id="tspan8240"><tspan
+         id="tspan10192"><tspan
            style="font-family:Calibri;-inkscape-font-specification:Calibri"
-           id="tspan8238">bulkStockUpdate</tspan></tspan></text>
+           id="tspan10190">bulkStockUpdate</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,110.74747,121.37253)"
@@ -444,9 +431,9 @@
        style="font-size:40px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4398-5-52);display:inline"><tspan
          x="212.58789"
          y="335.60156"
-         id="tspan8244"><tspan
+         id="tspan10196"><tspan
            style="font-family:Calibri;-inkscape-font-specification:Calibri;fill:#fc5124"
-           id="tspan8242">[id,min]</tspan></tspan></text>
+           id="tspan10194">[id,min]</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,11.641535,74.313398)"
@@ -454,9 +441,9 @@
        style="font-size:40px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4398-5-5);display:inline"><tspan
          x="212.58789"
          y="335.60156"
-         id="tspan8248"><tspan
+         id="tspan10200"><tspan
            style="font-family:Calibri;-inkscape-font-specification:Calibri;fill:#fc5124"
-           id="tspan8246">orderid</tspan></tspan></text>
+           id="tspan10198">orderid</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-42.575023,-68.824648)"
@@ -464,9 +451,9 @@
        style="font-size:40px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4398-5-5-0);display:inline"><tspan
          x="212.58789"
          y="335.60156"
-         id="tspan8252"><tspan
+         id="tspan10204"><tspan
            style="font-family:Calibri;-inkscape-font-specification:Calibri;fill:#fc5124"
-           id="tspan8250">return</tspan></tspan></text>
+           id="tspan10202">return</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-42.091042,-77.5901)"
@@ -474,8 +461,8 @@
        style="font-size:40px;line-height:1.25;font-family:'Blackadder ITC';-inkscape-font-specification:'Blackadder ITC';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4398-2);display:inline"><tspan
          x="212.58789"
          y="335.60156"
-         id="tspan8256"><tspan
+         id="tspan10208"><tspan
            style="font-family:Calibri;-inkscape-font-specification:Calibri;fill:#288782"
-           id="tspan8254">send</tspan></tspan></text>
+           id="tspan10206">send</tspan></tspan></text>
   </g>
 </svg>
