@@ -1,0 +1,61 @@
+apiVersion: v1
+data:
+  MONGODB_HOST: mongo-mongodb-0.mongo-mongodb-headless.k10app.svc.cluster.local
+  MONGODB_USER: root
+kind: ConfigMap
+metadata:
+  namespace: k10app
+  name: catalog-configuration
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: catalog
+  namespace: k10app
+  name: catalog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: catalog
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: catalog
+    spec:
+      containers:
+      - image: ghcr.io/k10app/catalog
+        name: catalog
+        envFrom:
+        - configMapRef:
+            name: catalog-configuration
+        env:
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mongodb-root-password
+              name: mongo-mongodb
+      imagePullSecrets:
+      - name: regcred  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: catalog
+  name: catalog
+  namespace: k10app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: catalog
+  type: ClusterIP
+---

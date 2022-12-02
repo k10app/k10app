@@ -1,0 +1,74 @@
+apiVersion: v1
+data:
+  MARIADB_HOST: mysql.k10app.svc.cluster.local
+  MARIADB_USER: root
+  MARIADB_DATABASE: userdb
+kind: ConfigMap
+metadata:
+  namespace: k10app
+  name: basicuserservice-configuration
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: basicuserservice
+  namespace: k10app
+  name: basicuserservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: basicuserservice
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: basicuserservice
+    spec:
+      initContainers:
+      - name: initkeys
+        image: alpine/openssl
+        command: ['sh', '-c', "cd /basicuserservice/certificates && openssl genrsa -out private.key 4096 && openssl rsa -in private.key -pubout -outform PEM -out public.pub"]
+        volumeMounts:
+        - mountPath: /basicuserservice/certificates
+          name: keystore
+      containers:
+      - image: ghcr.io/k10app/basicuserservice 
+        name: basicuserservice
+        envFrom:
+        - configMapRef:
+            name: basicuserservice-configuration
+        env:
+        - name: MARIADB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mysql-root-password
+              name: mysql
+        volumeMounts:
+        - mountPath: /basicuserservice/certificates
+          name: keystore
+      imagePullSecrets:
+      - name: regcred       
+      volumes:
+      - name: keystore
+        emptyDir:
+          sizeLimit: 5Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: basicuserservice 
+  name: basicuserservice 
+  namespace: k10app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: basicuserservice 
+  type: ClusterIP
