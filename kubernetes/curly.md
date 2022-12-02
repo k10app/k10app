@@ -21,14 +21,15 @@ curl -H "$JWTAUTH" -X GET http://basicuserservice/user/verify
 ## Test Catalog
 ```
 curl  -X GET http://catalog/catalog/list
-curl  -X GET http://catalog/catalog/list/638a23bd2f972ece441c78e9
+CATALOGID=$(curl  -X GET http://catalog/catalog/list | jq -r .[0]._id)
+curl  -X GET "http://catalog/catalog/list/$CATALOGID"
 ```
 
 ## Test Order
 ```
 curl -X GET http://order/order/basket/list
 curl -H "$JWTAUTH" -X GET http://order/order/basket/list
-curl -H "$JWTAUTH" -X POST -H 'Content-Type: application/json' http://order/order/basket/add -v -d '{"quantity": 1,"catalogId": "638a23bd2f972ece441c78e9"}'
+curl -H "$JWTAUTH" -X POST -H 'Content-Type: application/json' http://order/order/basket/add -v -d '{"quantity": 1,"catalogId": $CATALOGID}'
 curl -H "$JWTAUTH" -X GET http://order/order/basket/list
 
 curl -H "$JWTAUTH" -X POST -H 'Content-Type: application/json' http://order/order/main/create -d '{}'
