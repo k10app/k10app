@@ -29,7 +29,7 @@ curl  -X GET "http://catalog/catalog/list/$CATALOGID"
 ```
 curl -X GET http://order/order/basket/list
 curl -H "$JWTAUTH" -X GET http://order/order/basket/list
-curl -H "$JWTAUTH" -X POST -H 'Content-Type: application/json' http://order/order/basket/add -v -d '{"quantity": 1,"catalogId": $CATALOGID}'
+curl -H "$JWTAUTH" -X POST -H 'Content-Type: application/json' http://order/order/basket/add -v -d $(printf '{"quantity":1,"catalogId":"%s"}' "$CATALOGID")
 curl -H "$JWTAUTH" -X GET http://order/order/basket/list
 
 curl -H "$JWTAUTH" -X POST -H 'Content-Type: application/json' http://order/order/main/create -d '{}'
