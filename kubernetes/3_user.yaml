@@ -27,13 +27,6 @@ spec:
       labels:
         app: basicuserservice
     spec:
-      initContainers:
-      - name: initkeys
-        image: alpine/openssl
-        command: ['sh', '-c', "cd /basicuserservice/certificates && openssl genrsa -out private.key 4096 && openssl rsa -in private.key -pubout -outform PEM -out public.pub"]
-        volumeMounts:
-        - mountPath: /basicuserservice/certificates
-          name: keystore
       containers:
       - image: ghcr.io/k10app/basicuserservice 
         name: basicuserservice
@@ -48,13 +41,13 @@ spec:
               name: mysql
         volumeMounts:
         - mountPath: /basicuserservice/certificates
-          name: keystore
+          name: buskeys
       imagePullSecrets:
       - name: regcred       
       volumes:
-      - name: keystore
-        emptyDir:
-          sizeLimit: 5Mi
+      - name: buskeys
+        secret:
+          secretName: buskeys
 ---
 apiVersion: v1
 kind: Service
