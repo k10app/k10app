@@ -1,6 +1,11 @@
 # Helm Install for K10 blueprints
 First create the namespace (1_ns.yaml), then install these, then apply the remaining 1b,2,3,4 yaml (make sure you have created kubelogin)
 
+Port fwd to 5 nginx router with
+```
+kubectl port-forward --namespace k10app --address 0.0.0.0 service/router 1080:80
+```
+
 ```
 NSK10=k10app
 
