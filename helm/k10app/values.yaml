@@ -1,3 +1,7 @@
+global:
+  storageClass: "-"
+  
+
 # Default values for k10app.
 nameOverride: ""
 fullnameOverride: ""
@@ -5,8 +9,16 @@ fullnameOverride: ""
 serviceAccount:
   name: ""
 
+
 mongodb:
   architecture: "replicaset"
+  fullnameOverride: "mongo-mongodb"
+  nameOverride: "mongo"
 mysql:
   auth:
     database: "userdb"
+  fullnameOverride: "mysql"
+  nameOverride: "mysql"
+postgresql:
+  fullnameOverride: "postgres-postgresql"
+  nameOverride: "postgresql"
