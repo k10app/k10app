@@ -1,0 +1,76 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: {{ include "k10app.serviceAccountName" . }}
+  labels:
+    {{- include "k10app.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: null
+  name: {{ include "k10app.serviceAccountName" . }}
+  labels:
+    {{- include "k10app.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    "helm.sh/hook": pre-install
+  labels:
+    {{- include "k10app.labels" . | nindent 4 }}
+  creationTimestamp: null
+  name: {{ include "k10app.serviceAccountName" . }}-{{ include "k10app.serviceAccountName" . }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "k10app.serviceAccountName" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "k10app.serviceAccountName" . }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    "helm.sh/hook": pre-install
+  creationTimestamp: null
+  name: businit
+  labels:
+    {{- include "k10app.labels" . | nindent 4 }}
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        {{- include "k10app.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: ghcr.io/k10app/businit
+        name: businit
+        resources: {}
+        env:
+        - name: TARGET_NAMESPACE
+          value: {{ .Release.Namespace }}
+      restartPolicy: Never
+      serviceAccountName: {{ include "k10app.serviceAccountName" . }}
+      imagePullSecrets:
+      - name: regcred  

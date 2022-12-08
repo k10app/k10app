@@ -1,0 +1,72 @@
+apiVersion: v1
+data:
+  POSTGRES_HOST: postgres-postgresql.k10app.svc.cluster.local
+  POSTGRES_PORT: "5432"
+  POSTGRES_DATABASE: postgres
+  POSTGRES_USER: postgres
+  CATALOG_SERVER: catalog.k10app.svc.cluster.local
+  CATALOG_PORT: "80"
+kind: ConfigMap
+metadata:
+  labels:
+    {{- include "k10app.labels" . | nindent 4 }}
+  name: order-configuration
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: order
+    {{- include "k10app.labels" . | nindent 4 }}
+  name: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        {{- include "k10app.labels" . | nindent 8 }}
+        app: order
+    spec:
+      containers:
+      - image: ghcr.io/k10app/order 
+        name: order
+        envFrom:
+        - configMapRef:
+            name: order-configuration
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: postgres-password
+              name: postgres-postgresql
+        volumeMounts:
+        - mountPath: /order/certificates
+          name: buskeys
+      imagePullSecrets:
+      - name: regcred       
+      volumes:
+      - name: buskeys
+        secret:
+          secretName: buskeys
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: order 
+    {{- include "k10app.labels" . | nindent 4 }}
+  name: order 
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: order 
+  type: ClusterIP

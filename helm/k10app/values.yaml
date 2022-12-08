@@ -1,0 +1,8 @@
+# Default values for k10app.
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  name: ""
+
+
