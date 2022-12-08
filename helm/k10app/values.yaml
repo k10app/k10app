@@ -5,4 +5,8 @@ fullnameOverride: ""
 serviceAccount:
   name: ""
 
-
+mongodb:
+  architecture: "replicaset"
+mysql:
+  auth:
+    database: "userdb"

@@ -8,6 +8,7 @@ metadata:
     {{- include "k10app.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-10"
 rules:
 - apiGroups:
   - ""
@@ -29,12 +30,14 @@ metadata:
     {{- include "k10app.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-10"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   annotations:
     "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-10"
   labels:
     {{- include "k10app.labels" . | nindent 4 }}
   creationTimestamp: null
