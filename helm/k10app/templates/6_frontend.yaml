@@ -3,7 +3,7 @@ data:
   CATALOG_URL: ""
   USERS_URL: ""
   ORDERS_URL: ""
-  ROUTE_PREFIX: {{.Values.routingPrefix}}
+  ROUTE_PREFIX: "{{.Values.routingPrefix}}"
 kind: ConfigMap
 metadata:
   creationTimestamp: null

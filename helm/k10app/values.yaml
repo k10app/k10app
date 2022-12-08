@@ -3,6 +3,7 @@ global:
   
 
 routingPrefix: ""
+serviceType: "ClusterIP"
 
 # Default values for k10app.
 nameOverride: ""
