@@ -6,6 +6,7 @@ data:
   POSTGRES_USER: postgres
   CATALOG_SERVER: catalog.{{ .Release.Namespace }}.svc.cluster.local
   CATALOG_PORT: "80"
+  ROUTE_PREFIX: {{.Values.routingPrefix}}/order
 kind: ConfigMap
 metadata:
   labels:

@@ -6,18 +6,18 @@ data:
       listen [::]:80;
       server_name localhost;
 
-      location / {
-        proxy_pass http://frontend;
+      location {{.Values.routingPrefix}}/ {
+        proxy_pass http://frontend{{.Values.routingPrefix}};
       }
 
-      location /catalog {
-        proxy_pass http://catalog/catalog;
+      location {{.Values.routingPrefix}}/catalog {
+        proxy_pass http://catalog{{.Values.routingPrefix}}/catalog;
       }
-      location /user {
-        proxy_pass http://basicuserservice/user;
+      location {{.Values.routingPrefix}}/user {
+        proxy_pass http://basicuserservice{{.Values.routingPrefix}}/user;
       }
-      location /order {
-        proxy_pass http://order/order;
+      location {{.Values.routingPrefix}}/order {
+        proxy_pass http://order{{.Values.routingPrefix}}/order;
       }
 
       error_page 500 502 503 504 /50x.html;

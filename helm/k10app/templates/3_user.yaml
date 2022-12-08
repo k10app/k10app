@@ -3,6 +3,7 @@ data:
   MARIADB_HOST: mysql.{{ .Release.Namespace }}.svc.cluster.local
   MARIADB_USER: root
   MARIADB_DATABASE: userdb
+  ROUTE_PREFIX: {{.Values.routingPrefix}}/user
 kind: ConfigMap
 metadata:
   name: basicuserservice-configuration

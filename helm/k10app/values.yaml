@@ -2,7 +2,7 @@ global:
   storageClass: "-"
   
 
-prefix: ""
+routingPrefix: ""
 
 # Default values for k10app.
 nameOverride: ""
