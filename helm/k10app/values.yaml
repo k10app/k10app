@@ -2,6 +2,8 @@ global:
   storageClass: "-"
   
 
+prefix: ""
+
 # Default values for k10app.
 nameOverride: ""
 fullnameOverride: ""

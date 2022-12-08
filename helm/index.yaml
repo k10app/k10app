@@ -1,0 +1,24 @@
+apiVersion: v1
+entries:
+  k10app:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-12-08T19:07:09.7777308+01:00"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.x.x
+    - name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.x.x
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.x.x
+    description: K10 Demo App
+    digest: 146f8dd0c5385a674823bf71611f280f37b8b42b0c278158ce8db67de3ddd41b
+    name: k10app
+    type: application
+    urls:
+    - k10app-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-12-08T19:07:09.7582721+01:00"
