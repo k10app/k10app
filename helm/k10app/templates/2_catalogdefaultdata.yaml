@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  catalog.json: |-
+    [
+        {
+          "name": "Sticker",
+          "description": "It's a Kasten sticker",
+          "price": 1,
+          "imgurl": "/static/static-sticker-export-plain.svg",
+          "stock": 1000
+        },
+        {
+          "name": "Mug",
+          "description": "It's a Kasten mug",
+          "price": 3,
+          "imgurl": "/static/static-mug-export-plain.svg",
+          "stock": 95
+        }
+      ]
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: catalog-init
+  labels:
+    {{- include "k10app.labels" . | nindent 4 }}

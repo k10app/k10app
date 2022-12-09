@@ -46,6 +46,13 @@ spec:
             secretKeyRef:
               key: mongodb-root-password
               name: mongo-mongodb
+        volumeMounts:
+        - name: catalog-init
+          mountPath: /catalog/init
+      volumes:
+      - name: catalog-init
+        configMap:
+          name: catalog-init
       imagePullSecrets:
       - name: regcred  
 ---
