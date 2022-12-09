@@ -33,6 +33,10 @@ spec:
         {{- include "k10app.labels" . | nindent 8 }}
         app: order
     spec:
+      initContainers:
+      - name: port-check
+        image: alpine
+        command: ['sh', '-c','CNT=20;while [ $CNT -gt 0 ]; do echo -n "Try $CNT : "; nc -z postgres-postgresql.{{ .Release.Namespace }}.svc.cluster.local 5432 && break;CNT=$(($CNT-1)); echo "no connection, sleeping 5s"; sleep 5;done']    
       containers:
       - image: ghcr.io/k10app/order 
         name: order

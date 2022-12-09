@@ -30,6 +30,10 @@ spec:
         {{- include "k10app.labels" . | nindent 8 }}
         app: basicuserservice
     spec:
+      initContainers:
+      - name: port-check
+        image: alpine
+        command: ['sh', '-c','CNT=20;while [ $CNT -gt 0 ]; do echo -n "Try $CNT : "; nc -z mysql.{{ .Release.Namespace }}.svc.cluster.local 3306 && break;CNT=$(($CNT-1)); echo "no connection, sleeping 5s"; sleep 5;done']
       containers:
       - image: ghcr.io/k10app/basicuserservice 
         name: basicuserservice
