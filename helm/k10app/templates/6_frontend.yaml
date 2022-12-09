@@ -39,8 +39,10 @@ spec:
         envFrom:
         - configMapRef:
             name: frontend-configuration
+    {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-      - name: regcred  
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
 status: {}
 ---
 apiVersion: v1

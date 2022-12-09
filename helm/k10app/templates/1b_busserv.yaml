@@ -75,5 +75,7 @@ spec:
           value: {{ .Release.Namespace }}
       restartPolicy: Never
       serviceAccountName: {{ include "k10app.serviceAccountName" . }}
+    {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-      - name: regcred  
+        {{- toYaml . | nindent 8 }}
+    {{- end }} 

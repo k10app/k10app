@@ -53,8 +53,10 @@ spec:
       - name: catalog-init
         configMap:
           name: catalog-init
+    {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-      - name: regcred  
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
 ---
 apiVersion: v1
 kind: Service

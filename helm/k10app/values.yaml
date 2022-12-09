@@ -1,9 +1,7 @@
+# global
 global:
   storageClass: ""
   
-
-routingPrefix: ""
-serviceType: "ClusterIP"
 
 # Default values for k10app.
 nameOverride: ""
@@ -12,7 +10,12 @@ fullnameOverride: ""
 serviceAccount:
   name: ""
 
+routingPrefix: ""
+serviceType: "ClusterIP"
 
+imagePullSecrets: [{ "name": "regcred" }]
+
+# helm subchart configs
 mongodb:
   architecture: "replicaset"
   fullnameOverride: "mongo-mongodb"

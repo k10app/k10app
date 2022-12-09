@@ -52,8 +52,10 @@ spec:
         volumeMounts:
         - mountPath: /order/certificates
           name: buskeys
+    {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-      - name: regcred       
+        {{- toYaml . | nindent 8 }}
+    {{- end }}      
       volumes:
       - name: buskeys
         secret:

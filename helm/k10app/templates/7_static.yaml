@@ -6,7 +6,6 @@ metadata:
     app: static
     {{- include "k10app.labels" . | nindent 4 }}     
   name: static
-  namespace: k10app
 spec:
   replicas: 1
   selector:
@@ -23,8 +22,10 @@ spec:
       containers:
       - image: ghcr.io/k10app/staticcache
         name: static
+    {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-      - name: regcred  
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
 status: {}
 ---
 apiVersion: v1
