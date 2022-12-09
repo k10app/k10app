@@ -3,7 +3,7 @@ entries:
   k10app:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-12-09T09:41:56.9971661+01:00"
+    created: "2022-12-09T12:00:09.1287199+01:00"
     dependencies:
     - name: postgresql
       repository: https://charts.bitnami.com/bitnami
@@ -15,10 +15,10 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 9.x.x
     description: K10 Demo App
-    digest: 4cd3099687a80517b5d8a38055444e19bf2a805c3fbe807a228f56ebbdb6b5eb
+    digest: 90f247cf9430d214d6080c8c8f847529b8cd690d52b3bbde476e10695370a93d
     name: k10app
     type: application
     urls:
     - k10app-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-09T09:41:56.9757737+01:00"
+generated: "2022-12-09T12:00:09.1020722+01:00"
