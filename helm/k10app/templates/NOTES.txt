@@ -7,4 +7,4 @@ To get the router service configuration:
 kubectl --namespace {{ .Release.Namespace }} get service/router
 
 Port forward
-kubectl port-forward --namespace {{ .Release.Namespace }} --address 0.0.0.0 service/router 1080:80
+kubectl port-forward --namespace {{ .Release.Namespace }} --address 0.0.0.0 service/router 80:80
