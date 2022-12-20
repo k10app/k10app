@@ -33,12 +33,12 @@ helm install --namespace k10app --set global.storageClass=<custom storage class>
 ```
 
 ## Port mapping
-!! Always has to match port 80 !!
+The frontend expects the router to answer on port 80. If you are doing port forwarding, you can do so on port 80 to port 80
 ```
 kubectl port-forward --namespace k10app --address 0.0.0.0 service/router 80:80
 ```
 
-(OPTIONAL) with an external server
+(OPTIONAL) if you want to route it over an SSH tunnel, use an inbetween port (eg 1080)
 ```
 kubectl port-forward --namespace k10app --address 0.0.0.0 service/router 1080:80
 ssh -L 80:127.0.0.1:1080 <server>
