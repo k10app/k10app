@@ -7,3 +7,32 @@ The purpose of this app or the inital goals are:
 - Disaster Recovery of App from Cluster A to B.
 - Show multiple data services (postgres, mysql, mongodb)
 - The ability to show existing Kanister blueprints against these data services.
+
+# Deployment
+## Install
+```
+kubectl create ns k10app
+helm repo add k10app http://dewin.me/k10app
+helm install --namespace k10app k10app k10app/k10app
+```
+
+Or loadbalancer
+```
+kubectl create ns k10app
+helm repo add k10app http://dewin.me/k10app
+helm install --namespace k10app --set serviceType=LoadBalancer k10app k10app/k10app
+```
+
+## Port mapping
+!! Always has to match port 80 !!
+```
+kubectl port-forward --namespace k10app --address 0.0.0.0 service/router 80:80
+```
+
+(OPTIONAL) with an external server
+```
+kubectl port-forward --namespace k10app --address 0.0.0.0 service/router 1080:80
+ssh -L 80:127.0.0.1:1080 <server>
+```
+
+
