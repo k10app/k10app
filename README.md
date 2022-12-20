@@ -10,17 +10,26 @@ The purpose of this app or the inital goals are:
 
 # Deployment
 ## Install
+
+Create namespace and add the repository
 ```
 kubectl create ns k10app
 helm repo add k10app http://dewin.me/k10app
+```
+
+Install it with router as ClusterIP (default)
+```
 helm install --namespace k10app k10app k10app/k10app
 ```
 
-Or loadbalancer
+Install with router as Loadbalancer
 ```
-kubectl create ns k10app
-helm repo add k10app http://dewin.me/k10app
 helm install --namespace k10app --set serviceType=LoadBalancer k10app k10app/k10app
+```
+
+Install with a different storage class
+```
+helm install --namespace k10app --set global.storageClass=<custom storage class> k10app k10app/k10app
 ```
 
 ## Port mapping
