@@ -13,18 +13,24 @@ serviceAccount:
 routingPrefix: ""
 serviceType: "ClusterIP"
 
-imagePullSecrets: [{ "name": "regcred" }]
+imagePullSecrets: []
 
 # helm subchart configs
 mongodb:
   architecture: "replicaset"
   fullnameOverride: "mongo-mongodb"
   nameOverride: "mongo"
+  volumePermissions:
+    enabled: false
 mysql:
   auth:
     database: "userdb"
   fullnameOverride: "mysql"
   nameOverride: "mysql"
+  volumePermissions:
+    enabled: false
 postgresql:
   fullnameOverride: "postgres-postgresql"
   nameOverride: "postgresql"
+  volumePermissions:
+    enabled: false
