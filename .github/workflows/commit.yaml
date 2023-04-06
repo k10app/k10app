@@ -11,10 +11,7 @@ on:
 jobs:
   release:
     name: Release chart
-    permissions:
-      contents: read
-      id-token: write
-      packages: write
+    permissions: write-all
     runs-on: ubuntu-latest
     defaults:
       run:
