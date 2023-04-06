@@ -122,7 +122,7 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: 1
         run: |
-          set -euo pipefail
+          set -euo pipefail -y
 
           oci_registry="ghcr.io"
           oci_repository_prefix="${oci_registry}/${{ github.repository_owner }}/charts"
