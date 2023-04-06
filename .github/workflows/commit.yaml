@@ -133,4 +133,4 @@ jobs:
           helm push ${{ steps.release.outputs.path }} "oci://${oci_repository_prefix}"
 
           digest="$(crane digest "${oci_image}")"
-          cosign sign "${oci_image}@${digest}"
+          cosign sign "${oci_image}@${digest}" --yes
