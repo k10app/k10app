@@ -12,7 +12,7 @@ jobs:
   release:
     name: Release chart
     permissions:
-      contents: write
+      contents: read
       id-token: write
       packages: write
     runs-on: ubuntu-latest
