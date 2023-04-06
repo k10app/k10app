@@ -7,11 +7,13 @@ on:
       - main
     paths:
       - helm/k10app/Chart.yaml
-
 jobs:
   release:
     name: Release chart
-    permissions: write-all
+    permissions: 
+      contents: write
+      id-token: write
+      packages: write
     runs-on: ubuntu-latest
     defaults:
       run:
