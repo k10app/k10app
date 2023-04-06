@@ -7,4 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [UNRELEASED]
+## 0.1.0
+
+Initial testing phase 
+
+## 0.2.0 
+
+Chart release phase 
