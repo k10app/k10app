@@ -75,9 +75,15 @@ kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storagecla
 
 Now to deploy the demo application, firstly add the helm repository. 
 
-`helm repo add k10app http://dewin.me/k10app`
+` helm repo add k10app https://k10app.github.io/k10app`
+
+`helm repo update`
 
 The following command will create and deploy the k10app. 
+
+`helm install k10app -n k10app k10app/k10app --create-namespace`
+
+If you are running on minikube or local kubernetes cluster then you may need to set permissions as per below
 
 `helm install k10app -n k10app k10app/k10app --set mongodb.volumePermissions.enabled=True --set mysql.volumePermissions.enabled=True --set postgresql.volumePermissions.enabled=True --create-namespace` 
 
