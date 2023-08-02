@@ -1,0 +1,101 @@
+kind: Blueprint
+apiVersion: cr.kanister.io/v1alpha1
+metadata:
+  name: k10app-mysql-blueprint
+  namespace: kasten-io
+actions:
+  backup:
+    name: ""
+    kind: ""
+    outputArtifacts:
+      mysqlBackup:
+        kopiaSnapshot: "{{ .Phases.dumpToStore.Output.kopiaOutput }}"
+    phases:
+      - func: KubeTask
+        name: dumpToStore
+        objects:
+          mysqlSecret:
+            apiVersion: ""
+            group: ""
+            resource: ""
+            kind: Secret
+            name: "{{ .Object.metadata.name }}"
+            namespace: "{{ .StatefulSet.Namespace }}"
+        args:
+          command:
+            - bash
+            - -o
+            - errexit
+            - -o
+            - pipefail
+            - -c
+            - >
+              backup_file_path="dump.sql"
+
+              root_password="{{ index .Phases.dumpToStore.Secrets.mysqlSecret.Data "mysql-root-password" | toString }}"
+
+              dump_cmd="mysqldump --column-statistics=0 -u root --password=${root_password} -h {{ .Object.metadata.name }} --single-transaction --all-databases"
+
+              ${dump_cmd} | kando location push --profile '{{ toJson .Profile }}' --path "${backup_file_path}" --output-name "kopiaOutput" -
+          image: ghcr.io/kanisterio/mysql-sidecar:0.93.0
+          namespace: "{{ .StatefulSet.Namespace }}"
+  delete:
+    name: ""
+    kind: ""
+    inputArtifactNames:
+      - mysqlBackup
+    phases:
+      - func: KubeTask
+        name: deleteFromStore
+        args:
+          command:
+            - bash
+            - -o
+            - errexit
+            - -o
+            - pipefail
+            - -c
+            - >
+              backup_file_path="dump.sql"
+
+              kopia_snap='{{ .ArtifactsIn.mysqlBackup.KopiaSnapshot }}'
+
+              kando location delete --profile '{{ toJson .Profile }}' --path "${backup_file_path}" --kopia-snapshot "${kopia_snap}"
+          image: ghcr.io/kanisterio/mysql-sidecar:0.93.0
+          namespace: "{{ .Namespace.Name }}"
+  restore:
+    name: ""
+    kind: ""
+    inputArtifactNames:
+      - mysqlBackup
+    phases:
+      - func: KubeTask
+        name: restoreFromStore
+        objects:
+          mysqlSecret:
+            apiVersion: ""
+            group: ""
+            resource: ""
+            kind: Secret
+            name: "{{ .Object.metadata.name }}"
+            namespace: "{{ .StatefulSet.Namespace }}"
+        args:
+          command:
+            - bash
+            - -o
+            - errexit
+            - -o
+            - pipefail
+            - -c
+            - >
+              backup_file_path="dump.sql"
+
+              kopia_snap='{{ .ArtifactsIn.mysqlBackup.KopiaSnapshot }}'
+
+              root_password="{{ index .Phases.restoreFromStore.Secrets.mysqlSecret.Data "mysql-root-password" | toString }}"
+
+              restore_cmd="mysql -u root --password=${root_password} -h {{ .Object.metadata.name }}"
+
+              kando location pull --profile '{{ toJson .Profile }}' --path "${backup_file_path}" --kopia-snapshot "${kopia_snap}" - | ${restore_cmd}
+          image: ghcr.io/kanisterio/mysql-sidecar:0.93.0
+          namespace: "{{ .StatefulSet.Namespace }}"
