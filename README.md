@@ -4,12 +4,12 @@
  <img src="K10_StealthApp.png?raw=true" alt="K10App Logo" width="20%" height="20%" />
 </p>
 
-The purpose of this app or the inital goals are: 
+The purpose of this app or the initial goals are: 
 
 - Simple demo of backup and recovery.
 - Transform the application on restore.
 - Disaster Recovery of App from Cluster A to B.
-- Show multiple data services (postgres, mysql, mongodb)
+- Show multiple data services (postgres, MySQL, mongodb)
 - The ability to show Kanister blueprints against these data services.
 
 # Architecture 
@@ -59,7 +59,7 @@ The frontend expects the router to answer on port 80. If you are doing port forw
 kubectl port-forward --namespace k10app --address 0.0.0.0 service/router 80:80
 ```
 
-(OPTIONAL) if you want to route it over an SSH tunnel, use an inbetween port (eg 1080)
+(OPTIONAL) if you want to route it over an SSH tunnel, use an in-between port (e.g. 1080)
 
 ```shell
 kubectl port-forward --namespace k10app --address 0.0.0.0 service/router 1080:80
@@ -85,18 +85,17 @@ Like all good online shops, we need a way to login and authenticate with the sit
 
 This is an example command pulling directly from github, we would need to change to the correct URL 
 
-`kubectl --namespace kasten-io apply -f https://raw.githubusercontent.com/kanisterio/kanister/0.93.0/examples/mysql/blueprint-v2/mysql-blueprint.yaml`
+`kubectl --namespace kasten-io apply -f https://raw.githubusercontent.com/k10app/k10app/main/blueprints/k10app-mysql-blueprint.yml`
 
 We then need to annotate our mysql statefulset 
 
 ` kubectl --namespace k10app annotate statefulset/mysql kanister.kasten.io/blueprint=k10app-mysql-blueprint`
 
-
 ### PostgreSQL
 
 PostgreSQL is used to store our order information, firstly we need to add our blueprint to the kasten-io namespace. 
 
-
+`kubectl --namespace kasten-io apply -f https://raw.githubusercontent.com/k10app/k10app/main/blueprints/k10app-postgres-blueprint.yml`
 
 following this we can now annotate the statefulset.
 
@@ -106,7 +105,7 @@ following this we can now annotate the statefulset.
 
 Our final data service consists of our precious goods, the catalog database enables us to see our stock levels. This also has a hidden attack console to simulate manipulation with our stock levels and products available. We first add our blueprint. 
 
-
+`kubectl --namespace kasten-io apply -f https://raw.githubusercontent.com/k10app/k10app/main/blueprints/k10app-mongodb-blueprint.yml`
 
 Then we annotate the mongo statefulset. 
 
@@ -119,3 +118,5 @@ WIP
 - Easiest Demo is manipulating the stock levels using the unsecured admin portal. (Change Stock Levels, Change Products, Remove Products)
 - You could port-forward the databases and connect to be malicuous (Delete Users, Delete Orders, Change Orders)
 - A stretch goal would be to simulate transactions and show the power of consistency within the application. 
+
+
