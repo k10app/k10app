@@ -118,5 +118,8 @@ WIP
 - Easiest Demo is manipulating the stock levels using the unsecured admin portal. (Change Stock Levels, Change Products, Remove Products)
 - You could port-forward the databases and connect to be malicuous (Delete Users, Delete Orders, Change Orders)
 - A stretch goal would be to simulate transactions and show the power of consistency within the application. 
+- Clone Scenario, Imagine your dev team would like a copy of the dataset for your user database, this contains potentially sensitive data. How would you mask that data but stil provide the dev with a copy of good data. 
+- Disaster Recovery, How could we make sure we are protected against bad things and have a copy ready and waiting to run in a secondary location. 
+- Application Mobility, a demonstration of being able to move and manipulate the application by transforming areas of the application. 
 
 
