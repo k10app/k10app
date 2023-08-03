@@ -27,6 +27,12 @@ It’s easy to deploy with little to no configuration.
 If you’re using this demo, please ★Star this repository to show your interest!
 ## Deployment
 
+Add the helm chart repository 
+
+```shell
+helm repo add k10app https://k10app.github.io/k10app
+```
+
 Create the namespace to install the chart to
 
 ```shell
@@ -36,19 +42,19 @@ kubectl create ns k10app
 Install it with router as ClusterIP (default)
 
 ```shell
-helm install --namespace k10app k10app oci://ghcr.io/k10app/charts/k10app --version 0.1.0
+helm install --namespace k10app k10app/k10app --version 0.1.0
 ```
 
 Install with router as Loadbalancer
 
 ```shell
-helm install --namespace k10app --set serviceType=LoadBalancer k10app oci://ghcr.io/k10app/charts/k10app --version 0.1.0
+helm install --namespace k10app --set serviceType=LoadBalancer k10app k10app/k10app --version 0.1.0
 ```
 
 Install with a different storage class
 
 ```shell
-helm install --namespace k10app --set global.storageClass=<custom storage class> k10app oci://ghcr.io/k10app/charts/k10app --version 0.1.0
+helm install --namespace k10app --set global.storageClass=<custom storage class> k10app k10app/k10app --version 0.1.0
 ```
 
 ## Port mapping
