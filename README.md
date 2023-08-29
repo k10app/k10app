@@ -97,6 +97,14 @@ We then need to annotate our mysql statefulset
 
 ` kubectl --namespace k10app annotate statefulset/mysql kanister.kasten.io/blueprint=k10app-mysql-blueprint`
 
+We have also added a snapshot capable blueprint as well 
+
+`kubectl --namespace kasten-io apply -f https://raw.githubusercontent.com/k10app/k10app/main/blueprints/k10app-mysql-snapshot-blueprint.yml`
+
+and also annotate with 
+
+`kubectl --namespace k10app annotate statefulset/mysql kanister.kasten.io/blueprint=k10app-mysql-snap`
+
 ### PostgreSQL
 
 PostgreSQL is used to store our order information, firstly we need to add our blueprint to the kasten-io namespace. 
