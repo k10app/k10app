@@ -1,0 +1,47 @@
+apiVersion: cr.kanister.io/v1alpha1
+kind: Blueprint
+metadata:
+  name: k10app-mysql-snap
+actions:
+  backupPrehook:
+    phases:
+    - func: KubeOps
+      name: createLock
+      objects:
+        mysqlSecret:
+          kind: Secret
+          name: '{{ .StatefulSet.Name }}'
+          namespace: '{{ .StatefulSet.Namespace }}'
+      args:
+        operation: create
+        namespace: "{{ .StatefulSet.Namespace }}"
+        spec: |-
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: "{{ .StatefulSet.Name }}-lock"
+          spec:
+            restartPolicy: Never
+            containers:
+            - image: docker.io/bitnami/mysql
+              imagePullPolicy: IfNotPresent
+              name: mysql-client
+              command:
+              - sh
+              - -o
+              - errexit
+              - -c
+              - |
+                export MYSQL_ROOT_PASSWORD='{{ index .Phases.createLock.Secrets.mysqlSecret.Data "mysql-root-password" | toString }}'
+                mysql --user=root --password=${MYSQL_ROOT_PASSWORD} -h '{{ .StatefulSet.Name }}' --execute="FLUSH TABLES WITH READ LOCK; select sleep(120);"
+  backupPosthook:
+    phases:
+    - func: KubeOps
+      name: deleteLock
+      args:
+        operation: delete
+        objectReference:
+          apiVersion: "v1"
+          resource: "pods"
+          name: "{{ .StatefulSet.Name }}-lock"
+          namespace: '{{ .StatefulSet.Namespace }}'
