@@ -33,6 +33,12 @@ Add the helm chart repository
 helm repo add k10app https://k10app.github.io/k10app
 ```
 
+If the above repository is not adding then please try 
+
+```shell
+helm repo add k10app https://k10app.github.io/k10app/
+```
+
 Create the namespace to install the chart to
 
 ```shell
